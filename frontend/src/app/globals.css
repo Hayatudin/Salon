@@ -1,0 +1,148 @@
+@import "tailwindcss";
+
+@theme {
+  --color-gold-50: #fbf8f2;
+  --color-gold-100: #f4edd9;
+  --color-gold-200: #e7d8b0;
+  --color-gold-300: #d7bd7e;
+  --color-gold-400: #c9a456;
+  --color-gold-500: #b8860b;
+  --color-gold-600: #9c6c08;
+  --color-gold-700: #7d5206;
+  --color-gold-800: #623e08;
+  --color-gold-900: #503109;
+  
+  --color-luxe-gold: #d4af37;
+  --color-luxe-rose: #e25c80; /* Velvet Rose Pink */
+  --color-luxe-burgundy: #1f010e; /* Much darker burgundy */
+  --color-luxe-dark-burgundy: #0a0004; /* Absolute dark base */
+
+  --font-serif: "Playfair Display", serif;
+  --font-sans: "Outfit", sans-serif;
+}
+
+:root {
+  --background: #faf2f5;
+  --foreground: #2d0114;
+  --card: #ffffff;
+  --card-foreground: #2d0114;
+  --border: rgba(226, 92, 128, 0.15);
+  --accent-gold: #d4af37;
+  --accent-rose: #e25c80;
+  --accent-cream: #faf2f5;
+  --glass-bg: rgba(255, 255, 255, 0.65);
+  --glass-border: rgba(226, 92, 128, 0.1);
+  --shadow-color: rgba(45, 1, 20, 0.03);
+}
+
+.dark {
+  --background: #080004; /* Pitch black burgundy */
+  --foreground: #faf2f5;
+  --card: #14000a; /* Dark velvet wine card */
+  --card-foreground: #faf2f5;
+  --border: rgba(226, 92, 128, 0.06); /* Very faint border */
+  --accent-gold: #d4af37;
+  --accent-rose: #e25c80;
+  --accent-cream: #14000a;
+  --glass-bg: rgba(20, 0, 10, 0.4);
+  --glass-border: rgba(226, 92, 128, 0.05);
+  --shadow-color: rgba(0, 0, 0, 0.7);
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  transition: background-color 0.5s cubic-bezier(0.4, 0, 0.2, 1), color 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow-x: hidden;
+}
+
+/* Glassmorphism custom classes - borderless & dark */
+.glass-effect {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 10px 40px 0 var(--shadow-color);
+}
+
+.glass-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 12px 36px -12px var(--shadow-color);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-card:hover {
+  border-color: rgba(226, 92, 128, 0.25);
+  box-shadow: 0 16px 48px -8px rgba(226, 92, 128, 0.1);
+  transform: translateY(-2px);
+}
+
+.text-gold-gradient {
+  background: linear-gradient(135deg, #d4af37 0%, #f3e5ab 50%, #aa7c11 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bg-gold-gradient {
+  background: linear-gradient(135deg, #d4af37 0%, #f3e5ab 50%, #aa7c11 100%);
+}
+
+.text-rose-gradient {
+  background: linear-gradient(135deg, #e25c80 0%, #f68da7 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.bg-rose-gradient {
+  background: linear-gradient(135deg, #e25c80 0%, #f68da7 100%);
+}
+
+/* Background Gradients matching UI */
+.bg-luxe-gradient {
+  background: radial-gradient(circle at top, #1c000a 0%, #080004 100%);
+}
+
+.bg-gold-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(226, 92, 128, 0.05) 0%,
+    rgba(243, 229, 171, 0.1) 50%,
+    rgba(226, 92, 128, 0.05) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s infinite linear;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-rose);
+}
