@@ -5,22 +5,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { useLanguage } from "../../contexts/LanguageContext";
-import { nailDesigns, NailDesign } from "../../data/designs";
-import { apiService } from "../../services/api";
+import { NailDesign } from "../../data/designs";
+import { dynamicDesignService } from "../../services/designs";
 import { Search, Heart, Clock, DollarSign, X, Check, Calendar } from "lucide-react";
 import GlassCard from "../../components/GlassCard";
-
-// Mapping Unsplash high-res photos to match our designs
-const designImages: Record<string, string> = {
-  "rose-gold-elegance": "https://images.unsplash.com/photo-1604654894610-df63bc536371?auto=format&fit=crop&w=600&q=80",
-  "classic-french-tips": "https://images.unsplash.com/photo-1519014816548-bf5fe059798b?auto=format&fit=crop&w=600&q=80",
-  "midnight-luxe": "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?auto=format&fit=crop&w=600&q=80",
-  "bridal-blush": "https://images.unsplash.com/photo-1607779097040-26e80aa78e66?auto=format&fit=crop&w=600&q=80",
-  "nude-minimalist": "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80",
-  "cherry-blossom": "https://images.unsplash.com/photo-1610992015732-2449b76e443a?auto=format&fit=crop&w=600&q=80",
-  "acrylic-galaxy": "https://images.unsplash.com/photo-1632345031435-8797b2d58045?auto=format&fit=crop&w=600&q=80",
-  "gel-ombre-sunset": "https://images.unsplash.com/photo-1560869713-7d0a294308ee?auto=format&fit=crop&w=600&q=80",
-};
 
 export default function Gallery() {
   const { t } = useLanguage();
@@ -30,11 +18,35 @@ export default function Gallery() {
   const [favorites, setFavorites] = useState<string[]>([]);
   const [selectedDesign, setSelectedDesign] = useState<NailDesign | null>(null);
 
+  // Dynamic designs from backend
+  const [designs, setDesigns] = useState<NailDesign[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Load designs from backend API
+  useEffect(() => {
+    setIsLoading(true);
+    dynamicDesignService.getDesigns().then((loaded) => {
+      setDesigns(loaded);
+      setIsLoading(false);
+    });
+  }, []);
+
   // Load favorites from local storage
   useEffect(() => {
     const saved = localStorage.getItem("luxe_favorites");
     if (saved) {
       setFavorites(JSON.parse(saved));
+    }
+  }, []);
+
+  // Read ?shape= query param from URL
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      const shapeParam = params.get("shape");
+      if (shapeParam) {
+        setSelectedShape(shapeParam);
+      }
     }
   }, []);
 
@@ -50,21 +62,20 @@ export default function Gallery() {
     localStorage.setItem("luxe_favorites", JSON.stringify(updated));
   };
 
-  // Filter lists
-  const shapes = ["All", "Almond", "Coffin", "Oval", "Stiletto", "Square"];
-  const types = ["All", "Gel", "Acrylic", "French", "Luxury", "Minimalist"];
+  // Build dynamic filter options from the loaded designs
+  const shapeOptions = ["All", ...Array.from(new Set(designs.map((d) => d.shape).filter(Boolean)))];
+  const typeOptions = ["All", ...Array.from(new Set(designs.map((d) => d.type).filter(Boolean)))];
 
   // Filter calculation
-  const filteredDesigns = nailDesigns.filter((design) => {
-    const nameMatch = design.defaultName.toLowerCase().includes(search.toLowerCase()) || 
-                      t(`designs.${design.nameKey}`).toLowerCase().includes(search.toLowerCase());
+  const filteredDesigns = designs.filter((design) => {
+    const nameMatch = design.defaultName.toLowerCase().includes(search.toLowerCase());
     const shapeMatch = selectedShape === "All" || design.shape === selectedShape;
     const typeMatch = selectedType === "All" || design.type === selectedType;
     return nameMatch && shapeMatch && typeMatch;
   });
 
   return (
-    <div className="space-y-12">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:pl-32 py-10 w-full space-y-12">
       {/* Page Header */}
       <div className="text-center space-y-4">
         <h1 className="text-3xl sm:text-5xl font-serif font-bold text-foreground tracking-wide">
@@ -96,7 +107,7 @@ export default function Gallery() {
               {t("gallery.shape")}:
             </span>
             <div className="flex space-x-1.5">
-              {shapes.map((shape) => (
+              {shapeOptions.map((shape) => (
                 <button
                   key={shape}
                   onClick={() => setSelectedShape(shape)}
@@ -119,7 +130,7 @@ export default function Gallery() {
             {t("gallery.type")}:
           </span>
           <div className="flex space-x-1.5">
-            {types.map((type) => (
+            {typeOptions.map((type) => (
               <button
                 key={type}
                 onClick={() => setSelectedType(type)}
@@ -136,12 +147,17 @@ export default function Gallery() {
         </div>
       </GlassCard>
 
-      {/* Grid of Designs */}
-      {filteredDesigns.length > 0 ? (
+      {/* Loading State */}
+      {isLoading ? (
+        <div className="text-center py-20 space-y-4">
+          <div className="w-12 h-12 rounded-full border-2 border-luxe-rose/30 border-t-luxe-rose animate-spin mx-auto"></div>
+          <p className="text-sm text-foreground/50 font-semibold">Loading gallery designs...</p>
+        </div>
+      ) : filteredDesigns.length > 0 ? (
+        /* Grid of Designs */
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
           {filteredDesigns.map((design) => {
             const isFav = favorites.includes(design.id);
-            const imagePath = designImages[design.id] || design.image;
             return (
               <motion.div
                 key={design.id}
@@ -166,11 +182,12 @@ export default function Gallery() {
                 {/* Main Design Image */}
                 <div className="relative aspect-square overflow-hidden bg-luxe-gradient/50">
                   <Image
-                    src={imagePath}
+                    src={design.image}
                     alt={design.defaultName}
                     fill
                     className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                     sizes="(max-width: 768px) 50vw, 25vw"
+                    unoptimized={design.image.startsWith("/uploads")}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-luxe-burgundy/60 via-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </div>
@@ -223,11 +240,12 @@ export default function Gallery() {
                 {/* Large visual preview */}
                 <div className="relative aspect-square md:aspect-auto md:h-full min-h-[300px]">
                   <Image
-                    src={designImages[selectedDesign.id] || selectedDesign.image}
+                    src={selectedDesign.image}
                     alt={selectedDesign.defaultName}
                     fill
                     className="object-cover"
                     sizes="(max-width: 768px) 100vw, 50vw"
+                    unoptimized={selectedDesign.image.startsWith("/uploads")}
                   />
                   
                   {/* Close button */}

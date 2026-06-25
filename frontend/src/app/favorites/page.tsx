@@ -69,7 +69,7 @@ export default function Favorites() {
   };
 
   return (
-    <div className="space-y-12">
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 lg:pl-32 py-10 w-full space-y-12">
       {/* Header */}
       <div className="text-center space-y-4">
         <h1 className="text-3xl sm:text-5xl font-serif font-bold text-foreground tracking-wide">
@@ -240,13 +240,13 @@ export default function Favorites() {
         ) : (
           <div className="text-center py-12 max-w-md mx-auto space-y-4">
             <Paintbrush className="w-12 h-12 text-foreground/30 mx-auto" />
-            <p className="text-foreground/75 leading-relaxed">You haven't created any custom nail sets yet. Express your creativity in the Studio!</p>
+            <p className="text-foreground/75 leading-relaxed font-sans">You haven't saved any custom nail designs yet. Explore our beautiful designs in the Gallery!</p>
             <div className="pt-2">
               <Link
-                href="/custom-studio"
+                href="/gallery"
                 className="inline-flex items-center space-x-2 px-6 py-2 bg-rose-gradient text-white rounded-xl text-sm font-semibold shadow-md shadow-luxe-rose/25"
               >
-                <span>Open Design Studio</span>
+                <span>Browse Gallery</span>
               </Link>
             </div>
           </div>

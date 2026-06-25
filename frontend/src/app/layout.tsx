@@ -1,20 +1,15 @@
 import type { Metadata, Viewport } from "next";
-import { Playfair_Display, Outfit } from "next/font/google";
+import { Roboto } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "../contexts/ThemeContext";
 import { LanguageProvider } from "../contexts/LanguageContext";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 
-const playfair = Playfair_Display({
+const roboto = Roboto({
   subsets: ["latin"],
-  variable: "--font-serif",
-  display: "swap",
-});
-
-const outfit = Outfit({
-  subsets: ["latin"],
-  variable: "--font-sans",
+  weight: ["300", "400", "500", "700", "900"],
+  variable: "--font-roboto",
   display: "swap",
 });
 
@@ -36,19 +31,19 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${playfair.variable} ${outfit.variable} h-full antialiased`}
+      className={`${roboto.variable} h-full antialiased`}
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col bg-background text-foreground font-sans transition-colors duration-300" suppressHydrationWarning>
         <ThemeProvider>
           <LanguageProvider>
-            <div className="flex flex-col min-h-screen lg:flex-row">
+            <div className="relative min-h-screen flex flex-col">
               {/* Navbar holds the left sidebar on desktop & bottom bar on mobile */}
               <Navbar />
               
-              {/* Main Content Area: Offset for Left Sidebar on desktop and Bottom Nav on mobile */}
-              <div className="flex-grow flex flex-col min-h-screen lg:pl-32 pb-24 lg:pb-0">
-                <main className="flex-grow px-4 sm:px-6 lg:px-8 py-6 max-w-7xl w-full mx-auto">
+              {/* Main Content Area: Content spans 100% width and navbar overlays it */}
+              <div className="flex-grow flex flex-col min-h-screen pb-24 lg:pb-0">
+                <main className="flex-grow w-full">
                   {children}
                 </main>
                 <Footer />

@@ -2,14 +2,21 @@
 
 import React from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useLanguage } from "../contexts/LanguageContext";
 import { Phone, MapPin, Clock, Instagram, Send, Mail } from "lucide-react";
 
 export default function Footer() {
+  const pathname = usePathname();
   const { t } = useLanguage();
 
+  // Hide client footer inside admin pages
+  if (pathname?.startsWith("/admin")) {
+    return null;
+  }
+
   return (
-    <footer className="border-t border-border/80 bg-background/50 backdrop-blur-md transition-colors duration-300">
+    <footer className="border-t border-border bg-background/50 backdrop-blur-md transition-colors duration-300">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand & Description */}
@@ -25,7 +32,7 @@ export default function Footer() {
                 href="https://instagram.com"
                 target="_blank"
                 rel="noreferrer"
-                className="p-2 rounded-full border border-border/80 text-foreground hover:text-luxe-gold hover:border-luxe-gold transition-colors"
+                className="p-2 rounded-full border border-border text-foreground hover:text-luxe-gold hover:border-luxe-gold transition-colors"
                 aria-label="Instagram"
               >
                 <Instagram className="w-4 h-4" />
@@ -34,24 +41,37 @@ export default function Footer() {
                 href="https://telegram.org"
                 target="_blank"
                 rel="noreferrer"
-                className="p-2 rounded-full border border-border/80 text-foreground hover:text-luxe-gold hover:border-luxe-gold transition-colors"
+                className="p-2 rounded-full border border-border text-foreground hover:text-luxe-gold hover:border-luxe-gold transition-colors"
                 aria-label="Telegram"
               >
                 <Send className="w-4 h-4" />
               </a>
               <a
-                href="mailto:info@haniluxe.com"
-                className="p-2 rounded-full border border-border/80 text-foreground hover:text-luxe-gold hover:border-luxe-gold transition-colors"
-                aria-label="Email"
+                href="https://www.tiktok.com/@haniluxe"
+                target="_blank"
+                rel="noreferrer"
+                className="p-2 rounded-full border border-border text-foreground hover:text-luxe-gold hover:border-luxe-gold transition-colors"
+                aria-label="TikTok"
               >
-                <Mail className="w-4 h-4" />
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="w-4 h-4"
+                >
+                  <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5" />
+                </svg>
               </a>
             </div>
           </div>
 
           {/* Quick Links */}
           <div className="space-y-4">
-            <h3 className="font-serif text-lg font-semibold text-foreground border-b border-border/40 pb-2">
+            <h3 className="font-serif text-lg font-semibold text-foreground border-b border-border pb-2">
               Navigation
             </h3>
             <ul className="space-y-2 text-sm">
@@ -70,11 +90,7 @@ export default function Footer() {
                   {t("nav.tryOn")}
                 </Link>
               </li>
-              <li>
-                <Link href="/custom-studio" className="text-foreground/75 hover:text-luxe-gold transition-colors">
-                  {t("nav.customStudio")}
-                </Link>
-              </li>
+
               <li>
                 <Link href="/book" className="text-foreground/75 hover:text-luxe-gold transition-colors">
                   {t("nav.bookNow")}
@@ -85,7 +101,7 @@ export default function Footer() {
 
           {/* Business Hours */}
           <div className="space-y-4">
-            <h3 className="font-serif text-lg font-semibold text-foreground border-b border-border/40 pb-2">
+            <h3 className="font-serif text-lg font-semibold text-foreground border-b border-border pb-2">
               {t("home.hoursTitle")}
             </h3>
             <div className="space-y-2 text-sm text-foreground/70">
@@ -108,7 +124,7 @@ export default function Footer() {
 
           {/* Contact & Map Info */}
           <div className="space-y-4">
-            <h3 className="font-serif text-lg font-semibold text-foreground border-b border-border/40 pb-2">
+            <h3 className="font-serif text-lg font-semibold text-foreground border-b border-border pb-2">
               {t("home.contactTitle")}
             </h3>
             <div className="space-y-2.5 text-sm text-foreground/70">
@@ -135,7 +151,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 pt-6 border-t border-border/40 flex flex-col md:flex-row justify-between items-center text-xs text-foreground/50 space-y-4 md:space-y-0">
+        <div className="mt-12 pt-6 border-t border-border flex flex-col md:flex-row justify-between items-center text-xs text-foreground/50 space-y-4 md:space-y-0">
           <p>&copy; {new Date().getFullYear()} Hani Luxe Studio. All rights reserved.</p>
           <div className="flex space-x-4">
             <a href="#" className="hover:text-luxe-gold transition-colors">Privacy Policy</a>

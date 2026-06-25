@@ -11,6 +11,7 @@ export interface NailDesign {
   colors: string[]; // hex color codes representing the palette
   image: string; // public folder URL path
   tags: string[];
+  collectionId?: string | null;
 }
 
 export const nailDesigns: NailDesign[] = [

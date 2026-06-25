@@ -31,6 +31,47 @@ export interface TranslationSchema {
     weekdays: string;
     sunday: string;
     address: string;
+
+    premiumNailStudio: string;
+    whereBeauty: string;
+    meetsArt: string;
+    heroDesc: string;
+    exploreDesigns: string;
+    bookAppointment: string;
+    trendingNow: string;
+    featuredDesigns: string;
+    viewAllDesigns: string;
+    collections: string;
+    browseByStyle: string;
+    ourStory: string;
+    artistryInEvery: string;
+    detail: string;
+    aboutP1: string;
+    aboutP2: string;
+    yearsExperience: string;
+    happyClients: string;
+    nailDesigns: string;
+    hoursOfArt: string;
+    testimonials: string;
+    whatOurClientsSay: string;
+    getInTouch: string;
+    visitOurStudio: string;
+    location: string;
+    phone: string;
+    businessHours: string;
+    chatOnWhatsApp: string;
+    monFriLabel: string;
+    saturdayLabel: string;
+    sundayLabel: string;
+    closedLabel: string;
+    footerDesc: string;
+    quickLinks: string;
+    contact: string;
+    followUs: string;
+    allRightsReserved: string;
+    madeWithLove: string;
+    aiScannerShortDesc: string;
+    aiScannerBtn: string;
   };
   gallery: {
     title: string;
@@ -169,6 +210,47 @@ export const translations: Record<string, TranslationSchema> = {
       weekdays: "Monday - Saturday: 9:00 AM - 8:00 PM",
       sunday: "Sunday: 10:00 AM - 6:00 PM",
       address: "Bole Road, Addis Ababa, Ethiopia",
+
+      premiumNailStudio: "Premium Nail Studio",
+      whereBeauty: "Where Beauty",
+      meetsArt: "Meets Art",
+      heroDesc: "Discover hundreds of exquisite nail designs crafted by our expert artists. Your perfect style is just a scroll away.",
+      exploreDesigns: "Explore Designs",
+      bookAppointment: "Book Appointment",
+      trendingNow: "Trending Now",
+      featuredDesigns: "Featured Designs",
+      viewAllDesigns: "View All Designs",
+      collections: "Collections",
+      browseByStyle: "Browse by Style",
+      ourStory: "Our Story",
+      artistryInEvery: "Artistry in Every",
+      detail: "Detail",
+      aboutP1: "At Hani Nails, we believe your nails are more than just an accessory — they're an expression of who you are. Our team of expert nail artists combines creativity with precision to deliver stunning, personalized designs that make you feel confident and beautiful.",
+      aboutP2: "From elegant minimalist styles to bold, trend-setting creations, we bring your vision to life using premium products and techniques that ensure lasting beauty.",
+      yearsExperience: "Years Experience",
+      happyClients: "Happy Clients",
+      nailDesigns: "Nail Designs",
+      hoursOfArt: "Hours of Art",
+      testimonials: "Testimonials",
+      whatOurClientsSay: "What Our Clients Say",
+      getInTouch: "Get in Touch",
+      visitOurStudio: "Visit Our Studio",
+      location: "Location",
+      phone: "Phone",
+      businessHours: "Business Hours",
+      chatOnWhatsApp: "Chat on WhatsApp",
+      monFriLabel: "Monday – Friday",
+      saturdayLabel: "Saturday",
+      sundayLabel: "Sunday",
+      closedLabel: "Closed",
+      footerDesc: "Where beauty meets artistry. Premium nail care and design in the heart of the city.",
+      quickLinks: "Quick Links",
+      contact: "Contact",
+      followUs: "Follow Us",
+      allRightsReserved: "All rights reserved.",
+      madeWithLove: "Made with love in Ethiopia",
+      aiScannerShortDesc: "See how our premium nail designs look on your hand instantly with our smart virtual try-on.",
+      aiScannerBtn: "Try Virtual Try-On",
     },
     gallery: {
       title: "Design Gallery",
@@ -305,6 +387,47 @@ export const translations: Record<string, TranslationSchema> = {
       weekdays: "ሰኞ - ቅዳሜ: ከጠዋቱ 3:00 - ከምሽቱ 2:00 ሰዓት",
       sunday: "እሁድ: ከጠዋቱ 4:00 - ከሰዓት በኋላ 12:00 ሰዓት",
       address: "ቦሌ መንገድ፣ አዲስ አበባ፣ ኢትዮጵያ",
+
+      premiumNailStudio: "ፕሪሚየም ኔይል ስቱዲዮ",
+      whereBeauty: "ውበት",
+      meetsArt: "ከጥበብ ጋር",
+      heroDesc: "በባለሙያ አርቲስቶቻችን የተሰሩ መቶዎችን ምርጥ የኔይል ዲዛይኖች ያግኙ። ፍጹም ስታይልዎ አንድ ስክሮል ርቀት ላይ ነው።",
+      exploreDesigns: "ዲዛይኖችን ያስሱ",
+      bookAppointment: "ቀጠሮ ያውጡ",
+      trendingNow: "አሁን በስርጭት",
+      featuredDesigns: "ተመራጭ ዲዛይኖች",
+      viewAllDesigns: "ሁሉንም ዲዛይኖች ይመልከቱ",
+      collections: "ስብስቦች",
+      browseByStyle: "በስታይል ያስሱ",
+      ourStory: "ታሪካችን",
+      artistryInEvery: "በእያንዳንዱ ዝርዝር",
+      detail: "የጥበብ ስራ",
+      aboutP1: "በሃኒ ኔይልስ፣ ጥፍሮችዎ ከመግባባት በላይ እንደራስዎ ገለጣ እንደሆኑ እናምናለን። የእኛ የባለሙያ የኔይል አርቲስቶች ፈጠራን ከትክክለኝነት ጋር በማዋቀር እርስዎን እርግጠኛ እና ቆንጆ የሚያደርጉ ምርጥ እና የግል ዲዛይኖችን ያቀርባሉ።",
+      aboutP2: "ከልክ ያለ ሚኒማሊስት ስታይሎች እስከ ድፍርቃፍር የአዝማሚያ ፍጥረታዎች፣ ራዕይዎን ወደ ህይወት ለማምጣት ረዘም ያለ ውበትን የሚያረጋግጡ ፕሪሚየም ምርቶችን እና ዘዴዎችን እንጠቀማለን።",
+      yearsExperience: "የስራ ዓመት ልምድ",
+      happyClients: "ደስተኛ ደንበኞች",
+      nailDesigns: "የኔይል ዲዛይኖች",
+      hoursOfArt: "የጥበብ ሰዓታት",
+      testimonials: "ምስክርነቶች",
+      whatOurClientsSay: "ደንበኞቻችን ምን ይላሉ",
+      getInTouch: "አግኙን",
+      visitOurStudio: "ስቱዲዮያችንን ይጎብኙ",
+      location: "አካባቢ",
+      phone: "ስልክ",
+      businessHours: "የስራ ሰዓታት",
+      chatOnWhatsApp: "በ WhatsApp ይዋያዩ",
+      monFriLabel: "ሰኞ – አርብ",
+      saturdayLabel: "ቅዳሜ",
+      sundayLabel: "እሑድ",
+      closedLabel: "ዝግ",
+      footerDesc: "ውበት ከጥበብ ጋር የሚገናኝበት። በከተማ ልብ ውስጥ ፕሪሚየም የኔይል እንክብካቤ እና ዲዛይን።",
+      quickLinks: "ፈጣን አገናኞች",
+      contact: "አግኙን",
+      followUs: "ተከታተሉን",
+      allRightsReserved: "መብቱ በህግ የተጠበቀ ነው።",
+      madeWithLove: "በፍቅር በኢትዮጵያ ተሰራ",
+      aiScannerShortDesc: "የእኛን ፕሪሚየም የጥፍር ዲዛይኖች በእጅዎ ላይ እንዴት እንደሚታዩ በ-AI አማካኝነት ወዲያውኑ ይመልከቱ።",
+      aiScannerBtn: "አሁኑኑ በሞባይል ይሞክሩት",
     },
     gallery: {
       title: "የዲዛይን ጋለሪ",
