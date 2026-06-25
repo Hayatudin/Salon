@@ -1,3 +1,4 @@
+// Hani Luxe Studio - Premium Nail Salon
 "use client";
 
 import React, { useState, useEffect } from "react";
